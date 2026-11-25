@@ -1,0 +1,4 @@
+{"name":"monkey-pos-android","version":"1.1.0","private":true,"description":"Monkey POS for Android (Developer: Hemantha Digital)",
+"scripts":{"setup":"node setup.js","open":"npx cap open android"},
+"dependencies":{"@capacitor/android":"^6.2.0","@capacitor/core":"^6.2.0"},
+"devDependencies":{"@capacitor/assets":"^3.0.5","@capacitor/cli":"^6.2.0"}}
