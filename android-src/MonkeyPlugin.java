@@ -97,7 +97,8 @@ public class MonkeyPlugin extends Plugin {
                             }
                         } finally { c.close(); }
                     } else {
-                        d.execSQL(q, bind(p));
+                        Object[] b = bind(p);
+                        if (b.length == 0) d.execSQL(q); else d.execSQL(q, b);
                     }
                     out.put(rows);
                 }
