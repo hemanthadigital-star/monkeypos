@@ -15,8 +15,19 @@ jobs:
           distribution: temurin
           java-version: 17
       - run: npm install
+      - name: Prepare signing key
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/monkey.jks"; echo "KS_FILE=$RUNNER_TEMP/monkey.jks" >> "$GITHUB_ENV"; fi
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
       - run: node setup.js
+        env:
+          KS_PASS: ${{ secrets.KEY_PASSWORD }}
+          KS_ALIAS: ${{ secrets.KEY_ALIAS }}
       - run: chmod +x android/gradlew && cd android && ./gradlew assembleDebug
+        env:
+          KS_PASS: ${{ secrets.KEY_PASSWORD }}
+          KS_ALIAS: ${{ secrets.KEY_ALIAS }}
       - uses: actions/upload-artifact@v4
         with:
           name: monkey-pos-apk
