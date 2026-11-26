@@ -23,11 +23,11 @@ jobs:
       - run: node setup.js
         env:
           KS_PASS: ${{ secrets.KEY_PASSWORD }}
-          KS_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KS_ALIAS: monkeypos
       - run: chmod +x android/gradlew && cd android && ./gradlew assembleDebug
         env:
           KS_PASS: ${{ secrets.KEY_PASSWORD }}
-          KS_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KS_ALIAS: monkeypos
       - uses: actions/upload-artifact@v4
         with:
           name: monkey-pos-apk
